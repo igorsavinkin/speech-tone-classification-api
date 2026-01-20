@@ -84,6 +84,11 @@ def get_task(task_id: str) -> TaskResponse:
     return service.get_task(task_id)
 
 
+@app.get("/tasks", response_model=list[TaskResponse])
+def list_tasks() -> list[TaskResponse]:
+    return service.list_tasks()
+
+
 @app.post("/tasks/{task_id}/label", response_model=TaskResponse)
 def submit_label(task_id: str, request: HumanLabelRequest) -> TaskResponse:
     return service.submit_label(task_id, request.label, request.worker_id)

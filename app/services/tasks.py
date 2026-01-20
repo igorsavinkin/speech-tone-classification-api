@@ -59,6 +59,24 @@ class TaskService:
             final_label=task.final_label,
         )
 
+    def list_tasks(self) -> list[TaskResponse]:
+        tasks = self.queue.list_tasks()
+        return [
+            TaskResponse(
+                task_id=task.task_id,
+                text=task.text,
+                status=task.status,
+                model_label=task.model_label,
+                model_confidence=task.model_confidence,
+                human_labels=[
+                    HumanLabel(label=entry.label, worker_id=entry.worker_id)
+                    for entry in task.human_labels
+                ],
+                final_label=task.final_label,
+            )
+            for task in tasks
+        ]
+
     def submit_label(
         self, task_id: str, label: Label, worker_id: str | None
     ) -> TaskResponse:

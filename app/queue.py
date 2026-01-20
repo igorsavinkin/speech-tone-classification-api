@@ -56,6 +56,9 @@ class InMemoryQueue:
     def get_task(self, task_id: str) -> Optional[TaskEntry]:
         return self._tasks.get(task_id)
 
+    def list_tasks(self) -> List[TaskEntry]:
+        return list(self._tasks.values())
+
     def add_human_label(
         self, task_id: str, label: Label, worker_id: Optional[str]
     ) -> Optional[TaskEntry]:
