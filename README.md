@@ -22,6 +22,15 @@ curl -X POST http://127.0.0.1:8000/classify \
   -d "{\"text\": \"good excellent amazing\"}"
 ```
 
+## API Components
+
+- `FastAPI` app (`app/main.py`) exposes HTTP endpoints and serves the demo form.
+- `Schemas` (`app/schemas.py`) define request/response contracts with strict validation.
+- `Model service` (`app/services/model.py`) provides a simple sentiment heuristic with confidence.
+- `Task service` (`app/services/tasks.py`) routes requests to model vs. human flow.
+- `Queue` (`app/queue.py`) stores tasks and human labels (in-memory Redis-like store).
+- `Aggregation strategy` (`app/strategies/majority_vote.py`) decides final label via Majority Vote.
+
 ### GET /tasks/{task_id}
 
 ```
