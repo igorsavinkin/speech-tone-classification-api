@@ -37,6 +37,17 @@ curl -X POST http://127.0.0.1:8000/classify \
 curl http://127.0.0.1:8000/tasks/{task_id}
 ```
 
+### GET /tasks
+
+```
+curl http://127.0.0.1:8000/tasks
+```
+
+## Queue & Task Lifecycle
+
+- Tasks are stored in an in-memory queue (Redis-like) and persist until app restart.
+- By default, tasks do not expire. Add TTL logic if you need automatic cleanup.
+
 ### POST /tasks/{task_id}/label
 
 ```
